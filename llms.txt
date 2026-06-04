@@ -1,0 +1,11 @@
+# Fresh Mobile Detailing
+
+Fresh Mobile Detailing is a premium mobile detailing and System X certified ceramic coating service based in Richmond, TX, serving Katy, Sugar Land, and the Greater Houston area. We bring the full car wash and detailing experience directly to the customer's driveway.
+
+## Pages
+- [Home](https://fresh-mobile-detailing.pages.dev/)
+- [Services](https://fresh-mobile-detailing.pages.dev/services.html)
+- [About](https://fresh-mobile-detailing.pages.dev/about.html)
+- [Book Appointment](https://fresh-mobile-detailing.pages.dev/book.html)
+- [Privacy Policy](https://fresh-mobile-detailing.pages.dev/privacy.html)
+- [Terms of Service](https://fresh-mobile-detailing.pages.dev/terms.html)

@@ -233,7 +233,7 @@ body.bg-dark {
 }
 .service-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--primary); }
 .service-price { font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem; color: var(--accent); }
-.service-desc { color: #e4e4e7; line-height: 1.6; margin-bottom: 1.5rem; }
+.service-desc { color: #ffffff; line-height: 1.6; margin-bottom: 1.5rem; }
 .service-list { list-style: none; color: #e4e4e7; margin-bottom: 1.5rem; }
 .service-list li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
 .service-list li::before { content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: bold; }
