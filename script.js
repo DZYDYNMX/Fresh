@@ -201,6 +201,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentMain.className = newMain.className; // Transfer classes like hero background overrides
             }
 
+            // Swap background video if it has changed
+            const newVideoSrc = doc.querySelector('#bg-video source')?.getAttribute('src');
+            const currentVideo = document.getElementById('bg-video');
+            if (newVideoSrc && currentVideo) {
+                const currentSource = currentVideo.querySelector('source');
+                if (currentSource && currentSource.getAttribute('src') !== newVideoSrc) {
+                    currentSource.setAttribute('src', newVideoSrc);
+                    currentVideo.load();
+                    // Attempt to play, catch if mobile prevents it without interaction
+                    const playPromise = currentVideo.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(e => console.log('Video autoplay interrupted on SPA route:', e));
+                    }
+                }
+            }
+
             // Update title
             document.title = doc.title;
 
