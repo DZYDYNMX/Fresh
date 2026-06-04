@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&display=swap"></noscript>
 </head>
 <body>
     <div class="video-container">
@@ -21,7 +22,7 @@
 
     <nav class="navbar">
         <a href="index.html" class="logo">
-            <img src="assets/FRESH.jpg" alt="Fresh Mobile Detailing Logo" class="logo-img">
+            <img src="assets/FRESH.jpg" alt="Fresh Mobile Detailing Logo" class="logo-img" width="44" height="44">
         </a>
         <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
             <span></span><span></span><span></span>
@@ -30,7 +31,7 @@
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="services.html">Services</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="contact.html" class="nav-cta">Book</a></li>
+            <li><a href="book.html" class="nav-cta">Book</a></li>
         </ul>
     </nav>
 
@@ -41,7 +42,7 @@
                 <h1 class="hero-title"><span class="line-halo">Your Car.<br>Professionally<br><span class="hero-accent">Fresh.</span></span></h1>
                 <p class="hero-sub"><span class="line-halo">Certified mobile detailing &amp; System X ceramic coatings, brought to your driveway in Richmond, TX and surrounding areas.</span></p>
                 <div class="hero-actions">
-                    <a href="contact.html" class="cta-button">Book Your Detail</a>
+                    <a href="book.html" class="cta-button">Book Your Detail</a>
                     <a href="services.html" class="cta-button outline">View Services</a>
                 </div>
             </div>
@@ -98,7 +99,7 @@
                 <div class="glass-card" style="max-width:800px;margin:0 auto;">
                     <h2 class="title" style="font-size:2.8rem;margin-bottom:1.2rem;">Ready for that Fresh Feeling?</h2>
                     <p class="subtitle">Join our satisfied clients across Richmond and the surrounding Houston area.</p>
-                    <a href="contact.html" class="cta-button" style="font-size:1.15rem;padding:1.1rem 2.5rem;margin-top:1rem;display:inline-block;">Book Your Detail Today</a>
+                    <a href="book.html" class="cta-button" style="font-size:1.15rem;padding:1.1rem 2.5rem;margin-top:1rem;display:inline-block;">Book Your Detail Today</a>
                 </div>
             </div>
         </section>

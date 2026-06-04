@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 2. Booking Buttons (nav, page, or service modal)
-        const bookBtn = e.target.closest('.book-btn, .nav-cta, .svc-modal-book, a[href="contact.html"]');
+        const bookBtn = e.target.closest('.book-btn, .nav-cta, .svc-modal-book, a[href="book.html"]');
         if (bookBtn && bookingModal) {
             e.preventDefault();
             bookingModal.classList.add('active');

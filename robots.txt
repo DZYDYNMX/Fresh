@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fresh-mobile-detailing.pages.dev/sitemap.xml
