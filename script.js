@@ -6,18 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const playPromise = video.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {
-                // Autoplay blocked by browser policy (e.g. iOS Low Power Mode)
-                // Wait for the first touch/click anywhere on the screen to force play
                 document.body.addEventListener('touchstart', () => { video.play(); }, { once: true });
                 document.body.addEventListener('click', () => { video.play(); }, { once: true });
             });
         }
     });
 
-    // ── Hamburger ──────────────────────────────────────────────
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks  = document.querySelector('.nav-links');
+    // ── Elements & State ───────────────────────────────────────
+    const hamburger         = document.querySelector('.hamburger');
+    const navLinks          = document.querySelector('.nav-links');
+    const bookingModal      = document.getElementById('booking-modal');
+    const bookingClose      = document.querySelector('#booking-modal .modal-close');
+    const serviceModal      = document.getElementById('service-detail-modal');
+    const serviceModalClose = document.querySelector('#service-detail-modal .modal-close');
 
+    // ── Hamburger ──────────────────────────────────────────────
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
             const expanded = hamburger.getAttribute('aria-expanded') === 'true';
@@ -25,45 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                navLinks.classList.remove('active');
-            });
-        });
     }
 
-    // ── Booking Modal ──────────────────────────────────────────
-    const bookingModal  = document.getElementById('booking-modal');
-    const bookingClose  = document.querySelector('#booking-modal .modal-close');
-
-    if (bookingModal) {
-        bookingModal.addEventListener('click', e => { 
-            if (e.target === bookingModal) {
-                bookingModal.classList.remove('active');
-                document.body.classList.remove('no-scroll');
-            }
-        });
-        document.querySelectorAll('.book-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault();
-                bookingModal.classList.add('active');
-                document.body.classList.add('no-scroll');
-                const svc = btn.getAttribute('data-service');
-                if (svc) {
-                    const sel = document.getElementById('modal-service');
-                    if (sel) sel.value = svc;
-                }
-            });
-        });
-        bookingClose && bookingClose.addEventListener('click', () => {
-            bookingModal.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-        });
-    }
-
-    // ── Service Detail Modal ───────────────────────────────────
+    // ── Service Data for Detail Modal ──────────────────────────
     const serviceData = {
         wash_wax: {
             title: 'Premium Wash & Wax',
@@ -88,104 +55,174 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Full vacuum, seats, carpet, trunk & crevices',
                 'Hot water extraction carpet & upholstery shampoo',
                 'Leather cleaning & conditioning',
-                'Dashboard, console & door panels detailed',
-                'Air vents cleaned with detailing brushes',
-                'Interior windows & mirrors cleaned',
-                'Odor eliminator treatment',
+                'Steam cleaning of all plastics and vinyls',
+                'UV protection applied to dash and trim',
+                'Interior glass & displays cleaned',
+                'Odor elimination treatment',
             ],
-            note: 'Ideal for deep cleaning before selling or after heavy use.'
+            note: 'Ideal for daily drivers and family vehicles.'
         },
         combo: {
             title: 'Full Inside & Out',
             price: 'Starting at $250',
-            desc: 'The complete package. Every inch of your vehicle meticulously cleaned and protected.',
+            desc: 'The ultimate detailing package. A complete reset for your vehicle, inside and out.',
             items: [
-                'Everything in Wash & Wax',
+                'Everything in Premium Wash & Wax',
                 'Everything in Full Interior Detail',
-                'Clay bar paint decontamination',
-                'Sealant applied for extended protection',
-                'Engine bay wipe-down',
-                'Final inspection & quality check',
+                'Engine bay light cleaning & dressing',
+                'Clay bar treatment for smooth paint',
+                'Exhaust tips polished',
             ],
-            note: 'Most popular package. Best value for a full reset.'
+            note: 'Best value. Brings your car back to factory-fresh condition.'
         },
         ceramic: {
             title: 'System X Ceramic Coating',
-            price: 'Contact for Quote',
-            desc: 'The ultimate paint protection. As certified System X installers, we deliver years of durability and extreme gloss backed by a manufacturer warranty.',
+            price: 'Quote Required',
+            desc: 'Long-term paint protection using professional-grade System X ceramic nano-coatings.',
             items: [
-                'Full paint decontamination & clay bar',
-                '1-step or multi-step paint correction',
-                'System X Pro or Diamond ceramic coating',
-                'Extreme hydrophobicity, water beads instantly',
-                'UV, chemical & scratch resistance',
-                'Certified warranty included',
-                'Wheel coating available as add-on',
+                'Intensive multi-stage hand wash',
+                'Chemical & mechanical paint decontamination',
+                'Multi-stage paint correction (swirl & scratch removal)',
+                'Panel prep wipe down',
+                'System X Ceramic coating applied to paint, plastics, & glass',
+                'Registered manufacturer warranty',
             ],
             note: 'Paint correction level determined at inspection. Turnaround 1–3 days.'
         }
     };
 
-    const serviceModal      = document.getElementById('service-detail-modal');
-    const serviceModalClose = document.querySelector('#service-detail-modal .modal-close');
+    // ── Global Click Event Delegation (SPA & Modals) ───────────
+    document.body.addEventListener('click', async e => {
+        // 1. Close Modals if clicking on overlay
+        if (e.target === bookingModal) {
+            bookingModal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
+        if (e.target === serviceModal) {
+            serviceModal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+        }
 
-    if (serviceModal) {
-        document.querySelectorAll('.detail-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.preventDefault();
-                const key  = btn.getAttribute('data-detail');
-                const data = serviceData[key];
-                if (!data) return;
+        // 2. Booking Buttons (nav, page, or service modal)
+        const bookBtn = e.target.closest('.book-btn, .nav-cta, .svc-modal-book, a[href="contact.html"]');
+        if (bookBtn && bookingModal) {
+            e.preventDefault();
+            bookingModal.classList.add('active');
+            document.body.classList.add('no-scroll');
+            
+            // Close service modal if open
+            if (serviceModal) serviceModal.classList.remove('active');
 
-                serviceModal.querySelector('.svc-modal-title').textContent   = data.title;
-                serviceModal.querySelector('.svc-modal-price').textContent   = data.price;
-                serviceModal.querySelector('.svc-modal-desc').textContent    = data.desc;
-                serviceModal.querySelector('.svc-modal-note').textContent    = data.note;
-                const ul = serviceModal.querySelector('.svc-modal-list');
-                ul.innerHTML = data.items.map(i => `<li>${i}</li>`).join('');
+            const svc = bookBtn.getAttribute('data-service');
+            if (svc) {
+                const sel = document.getElementById('modal-service');
+                if (sel) sel.value = svc;
+            }
+            return;
+        }
 
-                // Wire up the Book button inside the modal
-                const bookBtn = serviceModal.querySelector('.svc-modal-book');
-                bookBtn.setAttribute('data-service', key);
+        // 3. Service Detail Buttons
+        const detailBtn = e.target.closest('.detail-btn');
+        if (detailBtn && serviceModal) {
+            e.preventDefault();
+            const key  = detailBtn.getAttribute('data-detail');
+            const data = serviceData[key];
+            if (!data) return;
 
-                serviceModal.classList.add('active');
-                document.body.classList.add('no-scroll');
-            });
+            serviceModal.querySelector('.svc-modal-title').textContent   = data.title;
+            serviceModal.querySelector('.svc-modal-price').textContent   = data.price;
+            serviceModal.querySelector('.svc-modal-desc').textContent    = data.desc;
+            serviceModal.querySelector('.svc-modal-note').textContent    = data.note;
+            serviceModal.querySelector('.svc-modal-list').innerHTML      = data.items.map(i => `<li>${i}</li>`).join('');
+
+            const svcBookBtn = serviceModal.querySelector('.svc-modal-book');
+            if (svcBookBtn) svcBookBtn.setAttribute('data-service', key);
+
+            serviceModal.classList.add('active');
+            document.body.classList.add('no-scroll');
+            return;
+        }
+
+        // 4. SPA Navigation Intercept
+        const link = e.target.closest('a');
+        if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+        
+        const url = new URL(link.href, window.location.href);
+        // Only intercept internal standard pages, not anchors or external links
+        if (url.origin !== window.location.origin) return;
+        if (url.pathname === window.location.pathname && url.hash) return;
+        if (url.pathname.endsWith('.pdf') || url.pathname.endsWith('.mp4')) return;
+        
+        e.preventDefault();
+
+        // Close mobile nav if open
+        if (hamburger && navLinks) {
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            navLinks.classList.remove('active');
+        }
+
+        await navigateTo(url.href);
+    });
+
+    // ── Modal Close Buttons ────────────────────────────────────
+    if (bookingClose) {
+        bookingClose.addEventListener('click', () => {
+            bookingModal.classList.remove('active');
+            document.body.classList.remove('no-scroll');
         });
-
-        serviceModalClose && serviceModalClose.addEventListener('click', () => {
+    }
+    if (serviceModalClose) {
+        serviceModalClose.addEventListener('click', () => {
             serviceModal.classList.remove('active');
             document.body.classList.remove('no-scroll');
         });
-        serviceModal.addEventListener('click', e => { 
-            if (e.target === serviceModal) {
-                serviceModal.classList.remove('active');
-                document.body.classList.remove('no-scroll');
-            }
-        });
-
-        // Book from inside service detail modal
-        serviceModal.querySelector('.svc-modal-book').addEventListener('click', e => {
-            e.preventDefault();
-            serviceModal.classList.remove('active');
-            if (bookingModal) {
-                bookingModal.classList.add('active');
-                document.body.classList.add('no-scroll');
-                const svc = e.currentTarget.getAttribute('data-service');
-                if (svc) {
-                    const sel = document.getElementById('modal-service');
-                    if (sel) sel.value = svc;
-                }
-            } else {
-                document.body.classList.remove('no-scroll');
-            }
-        });
     }
 
-    // ── Background Video ───────────────────────────────────────
-    const video = document.getElementById('bg-video');
-    if (video) {
-        // Optional: you can manually set a slower playback rate for all videos
-        video.playbackRate = 0.5;
+    // ── SPA Routing Logic ──────────────────────────────────────
+    window.addEventListener('popstate', () => {
+        navigateTo(window.location.href, false);
+    });
+
+    async function navigateTo(url, push = true) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network error');
+            const html = await response.text();
+            
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Swap main content securely
+            const newMain = doc.querySelector('main.main-content');
+            const currentMain = document.querySelector('main.main-content');
+            if (newMain && currentMain) {
+                currentMain.innerHTML = newMain.innerHTML;
+                currentMain.className = newMain.className; // Transfer classes like hero background overrides
+            }
+
+            // Update title
+            document.title = doc.title;
+
+            // Update active nav link
+            const pathname = new URL(url).pathname;
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                a.classList.remove('active');
+                const href = a.getAttribute('href');
+                if (pathname.endsWith(href) || (pathname.endsWith('/') && href === 'index.html')) {
+                    a.classList.add('active');
+                }
+            });
+
+            if (push) {
+                window.history.pushState({}, '', url);
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+            console.error('SPA Navigation failed:', error);
+            window.location.href = url; // Hard fallback
+        }
     }
 });
