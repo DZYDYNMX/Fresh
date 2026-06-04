@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── Elements & State ───────────────────────────────────────
     const hamburger         = document.querySelector('.hamburger');
     const navLinks          = document.querySelector('.nav-links');
-    const bookingModal      = document.getElementById('booking-modal');
-    const bookingClose      = document.querySelector('#booking-modal .modal-close');
-    const serviceModal      = document.getElementById('service-detail-modal');
-    const serviceModalClose = document.querySelector('#service-detail-modal .modal-close');
 
     // ── Hamburger ──────────────────────────────────────────────
     if (hamburger && navLinks) {
@@ -93,14 +89,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Global Click Event Delegation (SPA & Modals) ───────────
     document.body.addEventListener('click', async e => {
-        // 1. Close Modals if clicking on overlay
-        if (e.target === bookingModal) {
-            bookingModal.classList.remove('active');
+        // Modals might be dynamically injected by SPA, so query them here
+        const bookingModal = document.getElementById('booking-modal');
+        const serviceModal = document.getElementById('service-detail-modal');
+
+        // 1. Close Modals if clicking on overlay or close button
+        if (e.target.classList.contains('modal-overlay')) {
+            e.target.classList.remove('active');
             document.body.classList.remove('no-scroll');
         }
-        if (e.target === serviceModal) {
-            serviceModal.classList.remove('active');
-            document.body.classList.remove('no-scroll');
+        const closeBtn = e.target.closest('.modal-close');
+        if (closeBtn) {
+            const modal = closeBtn.closest('.modal-overlay');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
         }
 
         // 2. Booking Buttons (nav, page, or service modal)
@@ -165,20 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         await navigateTo(url.href);
     });
 
-    // ── Modal Close Buttons ────────────────────────────────────
-    if (bookingClose) {
-        bookingClose.addEventListener('click', () => {
-            bookingModal.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-        });
-    }
-    if (serviceModalClose) {
-        serviceModalClose.addEventListener('click', () => {
-            serviceModal.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-        });
-    }
-
     // ── SPA Routing Logic ──────────────────────────────────────
     window.addEventListener('popstate', () => {
         navigateTo(window.location.href, false);
@@ -200,6 +190,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentMain.innerHTML = newMain.innerHTML;
                 currentMain.className = newMain.className; // Transfer classes like hero background overrides
             }
+
+            // Swap modals dynamically
+            document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
+            doc.querySelectorAll('.modal-overlay').forEach(m => document.body.appendChild(m));
 
             // Swap background video if it has changed
             const newVideoSrc = doc.querySelector('#bg-video source')?.getAttribute('src');
