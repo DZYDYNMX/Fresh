@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Mobile Detailing Richmond, Katy, Sugar Land TX</title>
+    <meta name="description" content="View our premium mobile detailing packages serving Richmond, Katy, Sugar Land, and Houston. From exterior wash to full interior deep cleaning and System X ceramic coatings.">
+    <meta name="keywords" content="Car Wash Prices, Detailing Packages, Ceramic Coating Cost, Mobile Detailing Richmond TX, System X Certified Installer">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="assets/FRESH-ROLLS.mp4" type="video/mp4">
+        </video>
+        <div class="overlay"></div>
+    </div>
+
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="assets/FRESH.jpg" alt="Fresh Mobile Detailing Logo" class="logo-img">
+        </a>
+        <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="nav-cta">Book</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <section class="content-section">
+            <div class="page-container">
+                <div class="title-wrapper"><h1 class="page-title"><span class="line-halo">Detailing Packages</span></h1></div>
+                <div class="title-wrapper"><p class="page-subtitle"><span class="line-halo">Premium car care delivered to your driveway across Richmond, TX and surrounding areas.</span></p></div>
+
+                <div class="grid-container services-grid-2x2">
+                    <!-- Wash & Wax -->
+                    <div class="service-card">
+                        <h2 class="service-title">Premium Wash &amp; Wax</h2>
+                        <p class="service-price">Starting at $120</p>
+                        <p class="service-desc">A thorough exterior hand wash topped with a high-quality wax for lasting shine and protection.</p>
+                        <div class="service-card-actions">
+                            <button class="detail-btn" data-detail="wash_wax">View Details</button>
+                            <a href="contact.html" class="cta-button book-btn" data-service="wash_wax">Book This</a>
+                        </div>
+                    </div>
+
+                    <!-- Interior -->
+                    <div class="service-card">
+                        <h2 class="service-title">Full Interior Detail</h2>
+                        <p class="service-price">Starting at $150</p>
+                        <p class="service-desc">Complete interior rejuvenation. Every surface cleaned, conditioned, and restored to feel brand new.</p>
+                        <div class="service-card-actions">
+                            <button class="detail-btn" data-detail="interior">View Details</button>
+                            <a href="contact.html" class="cta-button book-btn" data-service="interior">Book This</a>
+                        </div>
+                    </div>
+
+                    <!-- Full combo -->
+                    <div class="service-card">
+                        <h2 class="service-title">Full Inside &amp; Out</h2>
+                        <p class="service-price">Starting at $250</p>
+                        <p class="service-desc">The complete package. Every inch of your vehicle meticulously cleaned and protected inside and out.</p>
+                        <div class="service-card-actions">
+                            <button class="detail-btn" data-detail="combo">View Details</button>
+                            <a href="contact.html" class="cta-button book-btn" data-service="combo">Book This</a>
+                        </div>
+                    </div>
+
+                    <!-- Ceramic -->
+                    <div class="service-card service-card--featured">
+                        <div class="featured-badge">Signature Service</div>
+                        <h2 class="service-title">System X Ceramic Coating</h2>
+                        <p class="service-price">Contact for Quote</p>
+                        <p class="service-desc">The ultimate paint protection. Years of durability and extreme gloss, backed by a manufacturer warranty.</p>
+                        <div class="service-card-actions">
+                            <button class="detail-btn" data-detail="ceramic">View Details</button>
+                            <a href="contact.html" class="cta-button book-btn" data-service="ceramic">Get a Quote</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/FRESH.jpg" alt="Fresh Mobile Detailing" class="footer-logo">
+                <p>Premium Mobile Detailing &amp; System X Ceramic Coatings<br>Serving Richmond, TX and surrounding areas</p>
+            </div>
+
+            <p class="footer-copy">&copy; 2026 Fresh Mobile Detailing LLC. All Rights Reserved.<br>
+            <small>By booking, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</small></p>
+        </div>
+    </footer>
+
+    <!-- Service Detail Modal -->
+    <div class="modal-overlay" id="service-detail-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="svc-modal-title title" style="font-size:1.8rem;margin-bottom:0.3rem;"></h2>
+            <p class="svc-modal-price service-price" style="font-size:1.2rem;margin-bottom:1rem;"></p>
+            <p class="svc-modal-desc service-desc" style="margin-bottom:1.5rem;"></p>
+            <ul class="svc-modal-list service-list" style="margin-bottom:1.5rem;"></ul>
+            <p class="svc-modal-note details-note"></p>
+            <button class="cta-button svc-modal-book" style="width:100%;border:none;cursor:pointer;margin-top:1.5rem;">Book This Service</button>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="booking-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <h2 class="title" style="font-size:2rem;margin-bottom:1rem;">Book Your Detail</h2>
+            <p style="margin-bottom:1.5rem;color:#e4e4e7;">Fill out the form or call <span style="color:var(--accent);font-weight:bold;">+1 (786) 205-9348</span></p>
+            <form action="#" method="POST" class="booking-form">
+                <div class="form-row">
+                    <div class="form-group"><label>Full Name</label><input type="text" class="form-control" required></div>
+                    <div class="form-group"><label>Phone Number</label><input type="tel" class="form-control" required></div>
+                </div>
+                <div class="form-group"><label>Email Address</label><input type="email" class="form-control" required></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Vehicle Make &amp; Model</label><input type="text" class="form-control" required></div>
+                    <div class="form-group"><label>Preferred Date</label><input type="date" class="form-control" required></div>
+                </div>
+                <div class="form-group">
+                    <label>Requested Service</label>
+                    <select id="modal-service" class="form-control" required>
+                        <option value="" disabled selected>Select a package...</option>
+                        <option value="wash_wax">Premium Wash &amp; Wax (From $120)</option>
+                        <option value="interior">Full Interior Detail (From $150)</option>
+                        <option value="combo">Full Inside &amp; Out (From $250)</option>
+                        <option value="ceramic">System X Ceramic Coating (Quote)</option>
+                        <option value="other">Other / Custom</option>
+                    </select>
+                </div>
+                <button type="submit" class="cta-button" style="width:100%;border:none;cursor:pointer;margin-top:1.5rem;">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

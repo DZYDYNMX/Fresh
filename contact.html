@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now | Fresh Mobile Detailing Houston Area</title>
+    <meta name="description" content="Book your premium mobile auto detailing appointment or System X ceramic coating service in Richmond, Katy, Sugar Land, or Houston TX. Call +1 (786) 205-9348.">
+    <meta name="keywords" content="Book Mobile Detailing, Auto Detailing Appointment, Richmond TX, Katy TX, Sugar Land TX, Houston, System X Ceramic Coating Booking">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-dark">
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            <img src="assets/FRESH.jpg" alt="Fresh Mobile Detailing Logo" class="logo-img">
+        </a>
+        <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="nav-cta active">Book</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <div class="page-container" style="padding-top: 2rem;">
+            <div style="text-align: center; margin-bottom: 2.5rem;">
+                <div class="title-wrapper"><h1 class="page-title"><span class="line-halo">Book Your Detail</span></h1></div>
+                <div class="title-wrapper"><p class="page-subtitle"><span class="line-halo">Reserve your spot online or give us a call.</span></p></div>
+                <a href="tel:+17862059348" class="phone-cta">+1 (786) 205-9348</a>
+            </div>
+
+            <div style="max-width: 680px; margin: 0 auto;">
+                <div class="glass-card" style="text-align: left;">
+                    <h2 class="service-title" style="font-size:1.8rem;margin-bottom:1.5rem;">Booking Request</h2>
+
+                    <form action="#" method="POST" class="booking-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vehicle">Vehicle Make &amp; Model</label>
+                                <input type="text" id="vehicle" name="vehicle" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Preferred Date</label>
+                                <input type="date" id="date" name="date" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Requested Service</label>
+                            <select id="service" name="service" class="form-control" required>
+                                <option value="" disabled selected>Select a package...</option>
+                                <option value="wash_wax">Premium Wash &amp; Wax (From $120)</option>
+                                <option value="interior">Full Interior Detail (From $150)</option>
+                                <option value="combo">Full Inside &amp; Out (From $250)</option>
+                                <option value="ceramic">System X Ceramic Coating (Quote)</option>
+                                <option value="other">Other / Custom</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Additional Details (Optional)</label>
+                            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="cta-button" style="width:100%;border:none;cursor:pointer;margin-top:1rem;">Submit Booking Request</button>
+                        <p style="color:#71717a;font-size:0.85rem;text-align:center;margin-top:1rem;">By submitting, you agree to our <a href="terms.html" style="color:#a1a1aa;">Terms of Service</a> and <a href="privacy.html" style="color:#a1a1aa;">Privacy Policy</a>.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/FRESH.jpg" alt="Fresh Mobile Detailing" class="footer-logo">
+                <p>Premium Mobile Detailing &amp; System X Ceramic Coatings<br>Serving Richmond, TX and surrounding areas</p>
+            </div>
+
+            <p class="footer-copy">&copy; 2026 Fresh Mobile Detailing LLC. All Rights Reserved.<br>
+            <small>By booking, you agree to our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>.</small></p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
