@@ -1,4 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ── Video Autoplay Kickstarter ─────────────────────────────
+    const bgVideos = document.querySelectorAll('video');
+    bgVideos.forEach(video => {
+        video.muted = true;
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Autoplay blocked by browser policy (e.g. iOS Low Power Mode)
+                // Wait for the first touch/click anywhere on the screen to force play
+                document.body.addEventListener('touchstart', () => { video.play(); }, { once: true });
+                document.body.addEventListener('click', () => { video.play(); }, { once: true });
+            });
+        }
+    });
+
     // ── Hamburger ──────────────────────────────────────────────
     const hamburger = document.querySelector('.hamburger');
     const navLinks  = document.querySelector('.nav-links');
