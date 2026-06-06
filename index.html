@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="video-container">
-        <video autoplay muted loop playsinline id="bg-video">
+        <video autoplay muted loop playsinline preload="auto" poster="assets/FRESH-JAY-poster.jpg" id="bg-video" onloadedmetadata="this.muted=true;this.play();">
             <source src="assets/FRESH-JAY.mp4" type="video/mp4">
         </video>
         <div class="overlay"></div>

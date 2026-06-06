@@ -1,8 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ── Booking Form Submission ────────────────────────────────
+    document.body.addEventListener('submit', async (e) => {
+        if (e.target.matches('.booking-form')) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            
+            // NOTE: The user must replace this URL with their Google Apps Script Web App URL
+            const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE';
+            
+            if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE') {
+                alert("The booking form is almost ready! Please configure the Google Script URL in script.js to enable submissions.");
+                return;
+            }
+
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(form);
+            const data = new URLSearchParams();
+            for (const pair of formData) {
+                data.append(pair[0], pair[1]);
+            }
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: data
+                });
+
+                if (response.ok) {
+                    form.innerHTML = '<div style="text-align: center; padding: 2rem 0;"><h3 style="color: var(--accent); margin-bottom: 1rem; font-size: 1.5rem;">Booking Request Sent!</h3><p style="font-size: 1.1rem; color: #e4e4e7;">Thank you! We have received your request and will get back to you shortly to confirm your appointment.</p></div>';
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('There was an error submitting your request. Please try calling us instead.');
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        }
+    });
+
     // ── Video Autoplay Kickstarter ─────────────────────────────
     const bgVideos = document.querySelectorAll('video');
     bgVideos.forEach(video => {
         video.muted = true;
+        video.defaultMuted = true;
+        video.setAttribute('playsinline', 'playsinline');
+        video.setAttribute('autoplay', 'autoplay');
+        video.setAttribute('muted', 'muted');
         const playPromise = video.play();
         if (playPromise !== undefined) {
             playPromise.catch(() => {

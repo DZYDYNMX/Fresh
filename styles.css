@@ -238,6 +238,12 @@ body.bg-dark {
 .service-list li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
 .service-list li::before { content: "✓"; color: var(--accent); position: absolute; left: 0; font-weight: bold; }
 
+/* Fix iOS phone number link styling globally */
+a[href^="tel"] {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* ===========================================================
    TYPOGRAPHY
    =========================================================== */
@@ -600,11 +606,16 @@ footer::before {
    MOBILE RESPONSIVENESS
    =========================================================== */
 @media (max-width: 768px) {
-    .content-section { padding: 3rem 0; }
-    .page-container { padding: 1.5rem 1rem; }
-    .glass-card { padding: 2rem 1.25rem; border-radius: 16px; width: 100%; }
-    .service-card { padding: 1.5rem 1.25rem; border-radius: 14px; }
-    .grid-container { gap: 1.25rem; }
+    .content-section { padding: 2rem 0; }
+    .page-container { padding: 1rem 0.5rem; }
+    .glass-card { padding: 1.25rem 1rem; border-radius: 16px; width: 100%; }
+    .service-card { padding: 1.25rem 1rem; border-radius: 14px; }
+    .grid-container { gap: 1rem; }
+
+    .form-row { gap: 0.75rem; }
+    .booking-form { gap: 0.75rem; }
+    .form-group { gap: 0.25rem; }
+    .form-control { padding: 0.75rem; }
 
     /* About grid stacks on mobile */
 
